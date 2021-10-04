@@ -1,30 +1,29 @@
 # JavaScript Code Quiz
 
-## **Description**
----
-A **timed miltiple choice quiz** to score the players knowledge of **JavaScript**. 
+## Description
 
+A timed miltiple choice quiz to score the players knowledge of **JavaScript**. 
 
-<br>
 
 ### **Gameplay**
 
 ---
 
- Clicking on the **start button** a **timer** begins a **countdown**. The **player** will have **three minutes** to complete a quiz of **ten questions**. 
-
-<br>
+ Clicking **Start** will being the timer countdown. The player will have three minutes to complete a quiz of ten questions. 
 
  #### **Rules / Flow**
 
- ---
-- A correct answer will **advance** the player to the next question and **score** them **one point**. 
+- Player will be shown a question and a list of answers to choose from. 
 
-- Answering incorrectly will **subtract 15 seconds** from the **timer** and **advance** the player to the next question **without points scored**. 
+- Player can choose the answer by hovering and clicking on the answer text.
 
-- When the **timer** reached **0** or, **all questions** have been **answered**, the quiz will **end**. The player well then be able to **save** their **intials and score**.
+- A correct answer will advance the player to the next question and score them one point. 
 
-- After the players **info** has been **entered**. They will be presented the **score list**
+- Answering incorrectly will subtract 15 seconds from the timer and advance the player to the next question without points scored. 
+
+- When the timer reaches 0 or, all questions have been answered, the quiz will end. The player well then be able to save their intials and score.
+
+- After the players info has been entered. They will be presented the score list.
 
 
 
