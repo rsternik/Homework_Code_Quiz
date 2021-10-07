@@ -14,6 +14,7 @@ let countDown = document.createElement('div');
 // Vars
 let playerScore = 0;
 let secondsLeft = 60;
+let wLeft = 1;
 
 // Arrays
 let questions = [
@@ -104,11 +105,7 @@ function renderQuestion() {
                 wrongAnswer();
             }
 
-        }
-        )
-
-
-
+        })
 
     }
 
@@ -120,12 +117,30 @@ function wrongAnswer(){
     
     footerEl.textContent = 'Incorrect';
     document.body.appendChild(footerEl);
+    let timerInterval = setInterval(function () {
+        wLeft--;
+        if (wLeft <= 0) {
+            clearInterval(timerInterval);
+            footerEl.replaceChildren();
+            
+        }
+
+    }, 1000);
 }
 function rightAnswer(){
 
     
     footerEl.textContent = 'Correct';
     document.body.appendChild(footerEl);
+    let timerInterval = setInterval(function () {
+        wLeft--;
+        if (wLeft <= 0) {
+            clearInterval(timerInterval);
+            footerEl.replaceChildren();
+            
+        }
+
+    }, 1000);
 }
 
 setTime();
