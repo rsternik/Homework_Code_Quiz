@@ -3,39 +3,39 @@
 let mainEl = document.getElementById('quiz');
 let questionEl = document.getElementById('question');
 let choicesEl = document.getElementById('choices');
-
+let headerEl = document.getElementById('top');
 
 //Creation elements
 let listContainer = document.createElement('ol');
 let list = document.createElement('li');
 let countDown = document.createElement('div');
-let headerEl = document.getElementById('top');
+
 
 // Vars
 let playerScore = 0;
-let secondsLeft = 10;
+let secondsLeft = 180;
 
 // Arrays
 let questions = [
     {
-        question: 'Commonly usd data types DO NOT include:',
+        question: 'Commonly used data types DO NOT include:',
         choices: ['strings', 'boolean', 'alerts', 'numbers'],
-        correct: 'true'
+        correct: 'alerts'
     },
     {
         question: 'The condition in an if / else statement is enclosed within ____',
         choices: ['quotes', 'curly brackets', 'paratheses', 'square brackets'],
-        correct: 'true'
+        correct: 'curly brackets'
     },
     {
-        question: 'Arrays in JavaScript can be uses to store ____',
+        question: 'Arrays in JavaScript can be used to store ____',
         choices: ['numbers and strings', 'other arrays', 'booleans', 'all of the above'],
-        correct: 'true'
+        correct: 'all of the above'
     },
     {
         question: 'String values must be enclosed within ____ when being assinged to variables.',
         choices: ['commas', 'curly brackets', 'quotes', 'paratheses'],
-        correct: 'true'
+        correct: 'quotes'
     },
 ];
 
@@ -50,7 +50,7 @@ function setTime() {
         secondsLeft--;
         countDown.textContent = secondsLeft;
         headerEl.appendChild(countDown);
-        console.log(secondsLeft);
+        
 
 
         if (secondsLeft === 0) {
@@ -67,27 +67,32 @@ function setTime() {
 function gameOver() {
 }
 
+let p = 0;
 
 function renderQuestion() {
 
-
+    for (let i = 0; i < questions.length; i++) {
         
+        questionEl.textContent = questions[p].question
         
-  
-    
-        let stuff = 0;
-        for (let i = 0; i < questions.length; i++) {
-        questionEl.textContent = questions[stuff].question
-        let choice = document.createElement('button');
-        choice.innerHTML = questions[stuff].choices[i];
-        choicesEl.appendChild(listContainer).appendChild(choice);
-        
+        let choice = document.createElement('li');
+        choice.textContent = questions[p].choices[i];
+        choicesEl.appendChild(listContainer).appendChild(choice)
+        // choicesEl.appendChild(listContainer).appendChild(choice)
+                
         // Records user choice
         choice.addEventListener('click', function () {
             
-            console.log(choice.textContent)
-           
-        });
+            choicesEl.removeChild(listContainer).remove
+            if (choice.textContent === questions[p].correct){
+                p++;
+                listContainer.replaceChildren();
+                renderQuestion();
+                
+            } 
+        }) 
+
+        
 
 
     }
