@@ -14,7 +14,7 @@ let countDown = document.createElement('div');
 // Vars
 let playerScore = 0;
 let playerName = 'Name:';
-let secondsLeft = 60;
+let secondsLeft = 120;
 let wLeft = 1;
 let turn = 0;
 
