@@ -13,8 +13,10 @@ let countDown = document.createElement('div');
 
 // Vars
 let playerScore = 0;
+let playerName = 'Name:';
 let secondsLeft = 60;
 let wLeft = 1;
+let turn = 0;
 
 // Arrays
 let questions = [
@@ -60,6 +62,9 @@ function setTime() {
             // Lose Screen
             gameOver();
         }
+        
+            
+        
 
     }, 1000);
 }
@@ -70,26 +75,37 @@ function gameOver() {
     let finish = 'Game Over!'
     console.log("Game over")
 }
+// Score Board
+function scoreBoard() {
+    document.body.replaceChildren()
+    console.log(playerScore)
+}
 
-let p = 0;
+
 
 function renderQuestion() {
-
+    if (turn >= 4){
+        scoreBoard();
+        return
+            }
     for (let i = 0; i < questions.length; i++) {
 
-        questionEl.textContent = questions[p].question
+        questionEl.textContent = questions[turn].question
 
         let choice = document.createElement('li');
-        choice.textContent = questions[p].choices[i];
+        choice.textContent = questions[turn].choices[i];
         choicesEl.appendChild(listContainer).appendChild(choice)
 
+        
+
+        
 
         // Records user choice
         choice.addEventListener('click', function () {
 
             choicesEl.removeChild(listContainer).remove
-            if (choice.textContent === questions[p].correct) {
-                p++;
+            if (choice.textContent === questions[turn].correct) {
+                turn++;
                 playerScore++;
                 listContainer.replaceChildren();
                 renderQuestion();
@@ -99,7 +115,7 @@ function renderQuestion() {
 
             } else {
                 secondsLeft -= 15;
-                p++;
+                turn++;
                 listContainer.replaceChildren();
                 renderQuestion();
                 wrongAnswer();
