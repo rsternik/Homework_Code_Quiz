@@ -1,0 +1,23 @@
+/* Oxanium Font Import */
+@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700&family=Oxanium:wght@400;700&display=swap");
+
+/* Body */
+
+body {
+  
+  /* Variables */
+
+  --ox: "Oxanium";
+  --shdw: 5px 3px 5px rgb(44, 43, 43);
+  --samusred: #b13e2c;
+  --samusblue: #8aeaf8;
+  --samgrad: rgb(106, 0, 0) linear-gradient(90deg, rgb(207, 205, 219) 0%, rgb(139, 176, 233) 50%, rgb(96, 82, 155) 100%);
+  
+  /* Body Defaults */
+  
+  font-family: var(--ox);
+  background: var(--samgrad);
+  color: rgb(234, 242, 243);
+  text-shadow: rgb(10, 89, 95) 1px 0 10px;
+}
+
