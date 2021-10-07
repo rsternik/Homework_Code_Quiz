@@ -10,7 +10,7 @@ let listContainer = document.createElement('ol');
 let list = document.createElement('li');
 let countDown = document.createElement('div');
 let headerEl = document.getElementById('top');
- 
+
 // Vars
 let playerScore = 0;
 let secondsLeft = 10;
@@ -46,12 +46,12 @@ function setTime() {
     // Sets interval in variable
     let headerEl = document.getElementById('top');
     let countDown = document.createElement('div');
-    let timerInterval = setInterval(function() {
+    let timerInterval = setInterval(function () {
         secondsLeft--;
         countDown.textContent = secondsLeft;
         headerEl.appendChild(countDown);
         console.log(secondsLeft);
-        
+
 
         if (secondsLeft === 0) {
             // Kills Execution
@@ -68,14 +68,30 @@ function gameOver() {
 }
 
 
-function renderQuestion(){
+function renderQuestion() {
 
-questionEl.textContent = questions[0].question
-for (let i = 0; i < questions[0].choices.length; i++) {
-    let choice = document.createElement('button');
-    choice.innerHTML = questions[0].choices[i];
-    choicesEl.appendChild(listContainer).appendChild(choice);
-}
+
+        
+        
+  
+    
+        let stuff = 0;
+        for (let i = 0; i < questions.length; i++) {
+        questionEl.textContent = questions[stuff].question
+        let choice = document.createElement('button');
+        choice.innerHTML = questions[stuff].choices[i];
+        choicesEl.appendChild(listContainer).appendChild(choice);
+        
+        // Records user choice
+        choice.addEventListener('click', function () {
+            
+            console.log(choice.textContent)
+           
+        });
+
+
+    }
+
 
 }
 
