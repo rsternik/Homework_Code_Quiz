@@ -1,22 +1,21 @@
 // Selectors
-let mainEl = document.getElementById('quiz')
-let questionEl = document.getElementById('question')
-let choicesEl = document.getElementById('choices')
-let messageEl = document.getElementById('message')
-let headerEl = document.getElementById('top')
-let scoreEl = document.getElementById('scoreboard')
-
-
+let mainEl = document.getElementById('quiz');
+let questionEl = document.getElementById('question');
+let choicesEl = document.getElementById('choices');
+let headerEl = document.getElementById('top');
+let footerEl = document.getElementById('message')
 //Creation elements
-let listContainer = document.createElement('ol')
-let list = document.createElement('li')
-let countDown = document.createElement('div')
+let listContainer = document.createElement('ol');
+let list = document.createElement('li');
+let countDown = document.createElement('div');
+
 
 // Vars
 let playerScore = 0;
-let secondsLeft
-let wLeft
-let turn
+let playerName = 'Name:';
+let secondsLeft = 121;
+let wLeft = 1;
+let turn = 0;
 
 // Arrays
 let questions = [
@@ -41,174 +40,104 @@ let questions = [
         correct: 'quotes'
     },
     {
-        question: 'A very useful tool used during development and debugging for printing content to degbugger is:',
-        choices: ['JavaScript', 'terminal/bash', 'for loops', 'console.log'],
+        question: 'A common tool when using chrome developer tools is.',
+        choices: ['python', 'jQuery', 'strings', 'console.log'],
         correct: 'console.log'
-    },
-]
+    }
+];
+
 
 // Countdown Timer
 function setTime() {
     // Sets interval in variable
-    let headerEl = document.getElementById('top')
-    let countDown = document.createElement('div')
-    let timerInterval = setInterval(function () {
-        secondsLeft--
-        countDown.textContent = secondsLeft
-        headerEl.appendChild(countDown)
-
-
-        // Times up condition
+    let headerEl = document.getElementById('top');
+    let countDown = document.createElement('div');
+    timerInterval = setInterval(function () {
+        secondsLeft--;
+        countDown.textContent = secondsLeft;
+        headerEl.appendChild(countDown);
         if (secondsLeft < 0) {
-            clearInterval(timerInterval)
-            scoreBoard()
-
+            // Kills Execution
+            clearInterval(timerInterval);
+            // Lose Screen
+            gameOver();
         }
-
-    }, 1000)
+    },1000);
 }
 
-
-// display
-function showStuff(id, text, btn) {
-    document.getElementById(main).style.display = 'block';
-    // hide the lorem ipsum text
-    
-    document.getElementById(text).style.display = 'none';
-    // hide the link
-    btn.style.display = 'none';
+// Game Over
+function gameOver() {
+    document.body.replaceChildren()
+    let finish = 'Game Over!'
+    console.log("Game over")
 }
-
-// Scoreboard
+// Score Board
 function scoreBoard() {
-    // Display Scoreboard
-    scoreEl.replaceChildren()
-    scoreEl.style.display = 'block';
-
-    //User text input 
-    let inputField = document.createElement('input')
-    inputField.textContent = 'Hello'
-    scoreEl.appendChild(inputField)
-
-    // Submit button
-    let button = document.createElement('button')
-    button.textContent = 'Submit'
-    scoreEl.appendChild(button)
-    // Click event
-    button.addEventListener('click', function () {
-
-        let initials = inputField.value
-        let scores = document.createElement('li')
-
-        scores.textContent = initials + " " + secondsLeft
-        scoreEl.appendChild(scores)
-        console.log(initials, secondsLeft)
-    })
-
-    // Reset quiz button
-    let resetButton = document.createElement('button')
-    resetButton.textContent = 'Reset Quiz'
-    scoreEl.appendChild(resetButton)
-    // Click event
-    resetButton.addEventListener('click', function () {
-        playerScore = 0
-        init()
-        scoreEl.style.display = 'none';
-        
-        
-        
-
-    })
-
-
-
+    document.body.replaceChildren()
+    console.log(secondsLeft)
 
 }
 
-// initialize quiz
-function init() {
-    
-    secondsLeft = 120;
-    turn = 0;
-    renderQuiz()
-
-};
-
-// Display quiz questions & choices
-function renderQuiz() {
-
-    if (turn >= 5) {
-        console.log('Finished')
-        scoreBoard()
-        mainEl.style.display = 'none'
+function renderQuestion() {
+    if (turn >= 5){
+        clearInterval(timerInterval)
+        scoreBoard();
         return
-       
-    }
-    mainEl.style.display = ''
-    for (let i = 0; i < questions[turn].choices.length; i++) {
-
-        questionEl.textContent = questions[turn].question
-
-        let choice = document.createElement('li')
-        choice.textContent = questions[turn].choices[i]
-        choicesEl.appendChild(listContainer).appendChild(choice)
-
-        // User Choice Input
-        choice.addEventListener('click', function () {
-
-            if (choice.textContent === questions[turn].correct) {
-                turn++
-                listContainer.replaceChildren()
-                renderQuiz()
-                rightAnswer()
-
-            } else {
-                secondsLeft -= 10
-                turn++
-                listContainer.replaceChildren()
-                renderQuiz()
-                wrongAnswer()
             }
 
+    for (let i = 0; i < questions[i].choices.length; i++) {
+
+        questionEl.textContent = questions[turn].question
+        let choice = document.createElement('li');
+        choice.textContent = questions[turn].choices[i];
+        choicesEl.appendChild(listContainer).appendChild(choice)
+
+        // Records user choice
+        choice.addEventListener('click', function () {
+
+            choicesEl.removeChild(listContainer).remove
+            if (choice.textContent === questions[turn].correct) {
+                turn++;
+                listContainer.replaceChildren();
+                renderQuestion();
+                rightAnswer();
+
+            } else {
+                secondsLeft -= 10;
+                turn++;
+                listContainer.replaceChildren();
+                renderQuestion();
+                wrongAnswer();
+            }
         })
 
     }
-
 }
 
-// Display if answer is correct or incorrect
-
-// Incorrect
-function wrongAnswer() {
-    wLeft = 1.5;
-    messageEl.textContent = 'Incorrect'
-    document.body.appendChild(messageEl)
+function wrongAnswer(){   
+    footerEl.textContent = 'Incorrect';
+    document.body.appendChild(footerEl);
     let timerInterval = setInterval(function () {
-        wLeft--
+        wLeft--;
         if (wLeft <= 0) {
-            clearInterval(timerInterval)
-            messageEl.replaceChildren()
-
+            clearInterval(timerInterval);
+            footerEl.replaceChildren();        
         }
 
-    }, 500)
-
+    }, 500);
 }
-
-// Correct
-function rightAnswer() {
-
-    messageEl.textContent = 'Correct'
-    document.body.appendChild(messageEl)
+function rightAnswer(){    
+    footerEl.textContent = 'Correct';
+    document.body.appendChild(footerEl);
     let timerInterval = setInterval(function () {
-        wLeft--
+        wLeft--;
         if (wLeft <= 0) {
-            clearInterval(timerInterval)
-            messageEl.replaceChildren()
+            clearInterval(timerInterval);
+            footerEl.replaceChildren();            
         }
 
-    }, 500)
+    }, 500);
 }
 
-init()
-
+setTime();
+renderQuestion();

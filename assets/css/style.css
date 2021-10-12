@@ -73,6 +73,7 @@ body {
 }
 
 header{
+    display: flex;
     font-size: 4em;
     color: rgb(226, 15, 15);
     text-shadow: rgb(81, 90, 41) 5px 2 5px;
