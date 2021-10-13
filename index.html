@@ -1,34 +1,25 @@
 <!DOCTYPE html>
-
 <html>
 
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title>Code Quiz</title>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
 <body>
-
     <header id="top">
         <div id="scoreTime">Score Time :&nbsp </div>
-        <div id="highScores"></div>
+        
     </header>
-
-
+    <section id="quizIntro"><p>Welcome to the Javascript Knowledge Quiz. Click 'Start' to begin.</p></section>
     <main id="quiz">
         <h1 id="question"></h1>
-        <div id="choices">
-        </div>
-    
+        <div id="choices"></div>
+        <div id="message"></div>
     </main>
-    <div id="message"></div>
-    <section id="scoreboard">
-        
-    </section>
-    
-
-
+    <section id="endGame"></section>
+    <div id="highScores"></div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
