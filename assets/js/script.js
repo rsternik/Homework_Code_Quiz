@@ -1,23 +1,29 @@
 // Selectors
-let mainEl = document.getElementById('quiz');
-let questionEl = document.getElementById('question');
-let choicesEl = document.getElementById('choices');
-let headerEl = document.getElementById('top');
+let mainEl = document.getElementById('quiz')
+let questionEl = document.getElementById('question')
+let choicesEl = document.getElementById('choices')
+let headerEl = document.getElementById('top')
 let messageEl = document.getElementById('message')
 let endGameEl = document.getElementById('endGame')
 let quizIntroEl = document.getElementById('quizIntro')
 let highScoresEl = document.getElementById('highScores')
 //Creation elements
-let listContainer = document.createElement('ol');
-let list = document.createElement('li');
-let countDown = document.createElement('div');
+let listContainer = document.createElement('ol')
+let list = document.createElement('li')
+let countDown = document.createElement('div')
+let hsButtonEl = document.createElement('button')
 let formInitials = document.createElement('input')
+let startButton = document.createElement('button')
+let endMessage = document.createElement('p')
+let initialsButton = document.createElement('button')
+let resetButton = document.createElement('button')
+let retryButton = document.createElement('button')
 // Vars
-let playerScore = 0;
-let playerName = 'Name:';
-let secondsLeft = 121;
-let wLeft = 1;
-let turn = 0;
+let playerScore = 0
+let playerName = 'Name:'
+let secondsLeft = 121
+let wLeft = 1
+let turn = 0
 // Arrays
 let questions = [
     {
@@ -45,7 +51,7 @@ let questions = [
         choices: ['python', 'jQuery', 'strings', 'console.log'],
         correct: 'console.log'
     }
-];
+]
 // Display quiz questions and answers
 function renderQuestion() {
     if (turn >= 5) {
@@ -108,32 +114,53 @@ function rightAnswer() {
 //End Game Score Board
 function scoreBoard() {
     quizIntroEl.style.display = 'none'
-    mainEl.style.display ='none'
+    mainEl.style.display = 'none'
     headerEl.style.display = 'none'
     highScoresEl.style.display = 'block'
     endGameEl.style.display = 'block'
-    console.log(secondsLeft)    
+    console.log(secondsLeft)
     // Enter Initials prompt
-    let endMessage = document.createElement('p')
-    let initialsButton = document.createElement('button') 
-    let resetButton = document.createElement('button') 
     endMessage.textContent = 'Enter your initials'
     initialsButton.textContent = 'Submit'
+    retryButton.textContent = 'Retry Quiz'
     resetButton.textContent = 'Reset Scores'
     endGameEl.appendChild(endMessage)
     endGameEl.appendChild(formInitials)
-    endGameEl.appendChild(initialsButton) 
+    endGameEl.appendChild(initialsButton)
+    endGameEl.appendChild(retryButton)
     endGameEl.appendChild(resetButton)
     // Event Listeners
     // Submit
-    initialsButton.addEventListener('click', function(){
+    initialsButton.addEventListener('click', function () {
+
+        localStorage.setItem(formInitials.value, secondsLeft)
+
+        for (let key in localStorage) {
+
+            console.log('Name:', key + ' ---- ' + 'Score:', localStorage[key])
+            if (typeof localStorage[key] === 'string') {
+                let pEl = document.createElement('li')
+                pEl.innerHTML = 'Name:' + key + ' ' + 'Score:' + localStorage[key]
+                highScoresEl.appendChild(pEl)
+                formInitials.style.display = 'none'
+                initialsButton.style.display = 'none'
+                endMessage.style.display = 'none'
+            }
+
+        }
+    })
+    // Retry Quiz
+    retryButton.addEventListener('click', function () {
+        window.location.reload(true)
 
     })
     // Reset
-    resetButton.addEventListener('click', function(){
-
+    resetButton.addEventListener('click', function () {
+        console.log('reset pressed')
+        localStorage.clear()
+        window.location.reload(true)
+        init()
     })
-
 }
 // Countdown Timer
 function setTime() {
@@ -150,30 +177,57 @@ function setTime() {
             // Scoreboard
             scoreBoard();
         }
-    },1000);
+    }, 1000);
 }
 // Begin quiz
 function quizStart() {
-    quizIntroEl.style.display = 'none'
     headerEl.style.display = 'flex'
-    mainEl.style.display ='block'
+    mainEl.style.display = 'block'
+    turn = 0
+    headerEl.replaceChildren()
+    choicesEl.replaceChildren()
     setTime()
     renderQuestion()
 }
-// Quiz initialize
+// Initialize
 function init() {
+    // Displays
+    quizIntroEl.style.display = 'block'
+    endGameEl.style.display = 'none'
     headerEl.style.display = 'none'
     mainEl.style.display = 'none'
-    highScoresEl.style.display = 'none'
-    quizIntroEl.style.display = 'block'
-    console.log('click to start quiz')
-
-    let startButton = document.createElement('button')
+    // Dynamics
     startButton.textContent = 'Start'
     quizIntroEl.appendChild(startButton)
-    startButton.addEventListener('click', function(){
+    quizIntroEl.appendChild(hsButtonEl)
+    hsButtonEl.textContent = "View High Scores"
+    // Event Listeners
+    // Quiz Start
+    startButton.addEventListener('click', function () {
+        highScoresEl.style.display = 'none'
+        quizIntroEl.style.display = 'none'
         quizStart()
+
     })
+    // View High Scores
+    hsButtonEl.addEventListener('click', function(){
+
+        localStorage.setItem(formInitials.value, secondsLeft)
+
+        for (let key in localStorage) {
+
+            console.log('Name:', key + ' ---- ' + 'Score:', localStorage[key])
+            if (typeof localStorage[key] === 'string') {
+                let pEl = document.createElement('li')
+                pEl.innerHTML = 'Name:' + key + ' ' + 'Score:' + localStorage[key]
+                highScoresEl.appendChild(pEl)
+                hsButtonEl.style.display = 'none'
+            }
+
+        }   
+        
+    })
+    
 }
 init()
 

@@ -85,5 +85,12 @@ header{
     font-size: 2.4em;
 }
 
+#highScores li{
+
+    display:flex;
+    padding: .5%;
+    color: chartreuse;
+}
+
 
 
