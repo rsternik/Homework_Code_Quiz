@@ -76,8 +76,7 @@ header{
     display: flex;
     font-size: 4em;
     color: rgb(226, 15, 15);
-    text-shadow: rgb(81, 90, 41) 5px 2 5px;
-        
+    text-shadow: rgb(81, 90, 41) 5px 2 5px;      
 }
 
 #message{
@@ -90,7 +89,9 @@ header{
     display:flex;
     padding: .5%;
     color: chartreuse;
+    font-size: 2em;
 }
 
-
-
+#quizIntro{
+    font-size: 1.6em;
+}

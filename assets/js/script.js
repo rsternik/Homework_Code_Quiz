@@ -136,11 +136,9 @@ function scoreBoard() {
         localStorage.setItem(formInitials.value, secondsLeft)
 
         for (let key in localStorage) {
-
-            console.log('Name:', key + ' ---- ' + 'Score:', localStorage[key])
             if (typeof localStorage[key] === 'string') {
                 let pEl = document.createElement('li')
-                pEl.innerHTML = 'Name:' + key + ' ' + 'Score:' + localStorage[key]
+                pEl.textContent = 'NAME:' + '  ' + key + ' - ' + 'SCORE:' + '  ' + localStorage[key]
                 highScoresEl.appendChild(pEl)
                 formInitials.style.display = 'none'
                 initialsButton.style.display = 'none'
@@ -210,24 +208,21 @@ function init() {
 
     })
     // View High Scores
-    hsButtonEl.addEventListener('click', function(){
+    hsButtonEl.addEventListener('click', function () {
 
         localStorage.setItem(formInitials.value, secondsLeft)
-
         for (let key in localStorage) {
-
-            console.log('Name:', key + ' ---- ' + 'Score:', localStorage[key])
             if (typeof localStorage[key] === 'string') {
                 let pEl = document.createElement('li')
-                pEl.innerHTML = 'Name:' + key + ' ' + 'Score:' + localStorage[key]
+                pEl.textContent = 'NAME:' + '  ' + key + ' - ' + 'SCORE:' + '  ' + localStorage[key]
                 highScoresEl.appendChild(pEl)
                 hsButtonEl.style.display = 'none'
             }
 
-        }   
-        
+        }
+
     })
-    
+
 }
 init()
 
