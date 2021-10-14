@@ -138,7 +138,7 @@ function scoreBoard() {
         for (let key in localStorage) {
             if (typeof localStorage[key] === 'string') {
                 let pEl = document.createElement('li')
-                pEl.textContent = 'NAME:' + '  ' + key + ' - ' + 'SCORE:' + '  ' + localStorage[key]
+                pEl.innerHTML = 'NAME:' + '  ' + key + ' - ' + 'SCORE:' + '  ' + localStorage[key]
                 highScoresEl.appendChild(pEl)
                 formInitials.style.display = 'none'
                 initialsButton.style.display = 'none'
@@ -204,23 +204,21 @@ function init() {
     startButton.addEventListener('click', function () {
         highScoresEl.style.display = 'none'
         quizIntroEl.style.display = 'none'
+        highScoresEl.replaceChildren()
         quizStart()
 
     })
     // View High Scores
     hsButtonEl.addEventListener('click', function () {
-
-        localStorage.setItem(formInitials.value, secondsLeft)
-        for (let key in localStorage) {
+            for (let key in localStorage) {
             if (typeof localStorage[key] === 'string') {
                 let pEl = document.createElement('li')
-                pEl.textContent = 'NAME:' + '  ' + key + ' - ' + 'SCORE:' + '  ' + localStorage[key]
+                pEl.innerHTML = 'NAME:' + '  ' + key + ' - ' + 'SCORE:' + '  ' + localStorage[key]
                 highScoresEl.appendChild(pEl)
                 hsButtonEl.style.display = 'none'
             }
 
         }
-
     })
 
 }
