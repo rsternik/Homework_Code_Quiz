@@ -27,3 +27,6 @@ A timed miltiple choice quiz to score the players knowledge of **JavaScript**.
 
 #### **Live URL**
 https://rsternik.github.io/Homework_Code_Quiz/
+
+#### **Preview**
+![](assets/img/preview.png)
